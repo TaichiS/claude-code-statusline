@@ -28,13 +28,29 @@ This script is based on statusline concepts and API patterns from [Claude HUD](h
 
 ### Windows Support
 
-This script runs on Windows via Bash (Git Bash/MSYS2) but requires `jq` to be installed.
+This script runs on Windows via Bash (Git Bash/MSYS2) but requires `jq` to be installed and accessible from within the bash environment.
 
-**Recommended installation (one-line):**
+**Step 1 — Install jq via winget (run in PowerShell or CMD):**
 ```powershell
 winget install jqlang.jq
 ```
-After installation, restart your terminal for PATH changes to take effect.
+
+**Step 2 — Make jq accessible in Git Bash:**
+
+winget installs `jq.exe` to a long path under `AppData` that Git Bash cannot find automatically. You need to copy it to a directory on your bash `PATH`:
+
+```bash
+# Run in Git Bash
+mkdir -p ~/bin
+cp "/c/Users/$USERNAME/AppData/Local/Microsoft/WinGet/Packages/jqlang.jq_Microsoft.Winget.Source_8wekyb3d8bbwe/jq.exe" ~/bin/jq.exe
+```
+
+Verify it works:
+```bash
+jq --version  # should print jq-1.x.x
+```
+
+> **Why this extra step?** winget updates the Windows system PATH, but Git Bash maps paths differently and `~/bin` (`C:\Users\<you>\bin`) is already on its PATH by default — the directory just needs to exist.
 
 ## Installation
 
@@ -127,9 +143,8 @@ This script calls the Anthropic usage API:
 Tokens are automatically resolved from:
 1. Environment variable: `CLAUDE_CODE_OAUTH_TOKEN`
 2. macOS Keychain: `Claude Code-credentials`
-3. Credentials file: `~/.claude/.credentials.json`
+3. Credentials file: `~/.claude/.credentials.json` (works on all platforms including Windows)
 4. Linux Secret Service (GNOME Keyring)
-5. Windows: Not supported (script skips token resolution on Windows)
 
 ## License
 
