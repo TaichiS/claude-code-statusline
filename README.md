@@ -20,13 +20,58 @@ This script is based on statusline concepts and API patterns from [Claude HUD](h
 
 ## Requirements
 
-- Bash shell
+- Bash shell (including Git Bash/MSYS2 on Windows)
 - `jq` - JSON processor
 - `git` - for branch/status detection
 - `curl` - for API requests
-- macOS or Linux
+- macOS, Linux, or Windows (with Bash shell)
+
+### Windows Support
+
+This script runs on Windows via Bash (Git Bash/MSYS2) but requires `jq` to be installed.
+
+**Recommended installation (one-line):**
+```powershell
+winget install jqlang.jq
+```
+After installation, restart your terminal for PATH changes to take effect.
 
 ## Installation
+
+### macOS / Linux
+
+1. Clone this repository:
+```bash
+git clone https://github.com/YOUR_USERNAME/claude-code-statusline.git
+cd claude-code-statusline
+```
+
+2. Copy to Claude Code config directory:
+```bash
+cp statusline.sh ~/.claude/statusline.sh
+chmod +x ~/.claude/statusline.sh
+```
+
+3. Configure Claude Code to use the custom statusline:
+```bash
+cat > ~/.claude/settings.json << 'EOF'
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"$HOME/.claude/statusline.sh\""
+  }
+}
+EOF
+```
+
+4. Restart Claude Code
+
+### Windows (Git Bash/MSYS2)
+
+**Prerequisites:**
+- Git for Windows (includes Git Bash)
+- Claude Code installed
+- `jq` installed (see Requirements)
 
 1. Clone this repository:
 ```bash
@@ -84,6 +129,7 @@ Tokens are automatically resolved from:
 2. macOS Keychain: `Claude Code-credentials`
 3. Credentials file: `~/.claude/.credentials.json`
 4. Linux Secret Service (GNOME Keyring)
+5. Windows: Not supported (script skips token resolution on Windows)
 
 ## License
 
