@@ -4,9 +4,9 @@ Personal backup of Claude Code custom statusline script.
 
 ## Credits
 
-**Original author unknown.**
+**Original script:** [claude-statusline](https://github.com/nilbuild/claude-statusline) by [Kamran Ahmed](https://github.com/kamranahmedse) (MIT License).
 
-This script is based on statusline concepts and API patterns from [Claude HUD](https://github.com/jarrodwatts/claude-hud) by Jarrod Watts (MIT License).
+This repository is a fork with added Windows compatibility (Git Bash/MSYS2), Linux Secret Service (`secret-tool`) support, and documentation improvements. The original does not include Windows support.
 
 ## Features
 
@@ -150,10 +150,7 @@ Tokens are automatically resolved from:
 
 MIT - See [LICENSE](LICENSE) file
 
-## Disclaimer
-
-This is a personal backup of a script whose original author is unknown. Use at your own risk. The script may contain bugs or security vulnerabilities.
-
 ## Related Projects
 
-- [Claude HUD](https://github.com/jarrodwatts/claude-hud) - TypeScript/Node.js statusline plugin with similar features
+- [claude-statusline](https://github.com/nilbuild/claude-statusline) — original source (also installable via `npx @kamranahmedse/claude-statusline`)
+- [Claude HUD](https://github.com/jarrodwatts/claude-hud) — TypeScript/Node.js statusline plugin with similar features
